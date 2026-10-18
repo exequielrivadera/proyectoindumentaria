@@ -22,12 +22,8 @@ const PRODUCTS = [
   {id:"medias-sport", name:"Medias Sport", category:"accesorios", style:"deportiva", description:"Pack de medias deportivas de uso cotidiano.", price:15000, image:null, sizes:{"39/42":5,"43/46":0}}
 ];
 
-// PROMOCIONES: se pueden modificar desde este bloque cuando exista el catálogo real.
-const PROMOTIONS = {
-  selected2x1: ["medias-sport"], // 2x1 en productos seleccionados
-  remerasDiscount: 0.15,          // 15% llevando 2 o más remeras, aunque sean modelos distintos
-  transferDiscount: 0.10          // 10% pagando por transferencia
-};
+// Único descuento activo: 10% cuando se selecciona pago por transferencia.
+const TRANSFER_DISCOUNT_RATE = 0.10;
 
 let cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
 let activeProduct = null;
@@ -94,32 +90,10 @@ function renderProducts(){
   renderActiveFilters();
 }
 
-function calculatePromotions(){
-  const entries=Object.values(cart);
-  let promoDiscount=0;
-
-  // 2x1: cada dos unidades del mismo producto seleccionado, una se bonifica.
-  PROMOTIONS.selected2x1.forEach(productId=>{
-    const qty=entries.filter(i=>i.productId===productId).reduce((sum,i)=>sum+i.quantity,0);
-    const product=productById(productId);
-    if(product && qty>=2) promoDiscount += Math.floor(qty/2)*product.price;
-  });
-
-  // 15% llevando dos o más remeras, aunque sean modelos diferentes.
-  const remeraEntries=entries.filter(i=>productById(i.productId)?.category==="remeras");
-  const remeraQty=remeraEntries.reduce((sum,i)=>sum+i.quantity,0);
-  if(remeraQty>=2){
-    promoDiscount += remeraEntries.reduce((sum,i)=>sum+i.price*i.quantity,0)*PROMOTIONS.remerasDiscount;
-  }
-
-  return promoDiscount;
-}
-
 function cartTotals(){
-  const subtotal=Object.values(cart).reduce((sum,i)=>sum+i.price*i.quantity,0);
-  const promoDiscount=Math.min(calculatePromotions(),subtotal);
-  const transferDiscount=transferSelected ? Math.round((subtotal-promoDiscount)*PROMOTIONS.transferDiscount) : 0;
-  return {subtotal,promoDiscount,transferDiscount,total:subtotal-promoDiscount-transferDiscount};
+  const subtotal = Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const transferDiscount = transferSelected ? Math.round(subtotal * TRANSFER_DISCOUNT_RATE) : 0;
+  return { subtotal, transferDiscount, total: subtotal - transferDiscount };
 }
 
 function renderCart(){
@@ -128,20 +102,15 @@ function renderCart(){
   $("cartAmount").textContent=money(totals.total);
   $("cartSubtotal").textContent=money(totals.subtotal);
   $("cartTotal").textContent=money(totals.total);
-  // Calcular el descuento mostrado desde subtotal - total para que coincida siempre
-  // con el importe final, incluyendo promociones y transferencia.
-  const totalDiscount = Math.max(0, totals.subtotal - totals.total);
-  const promoRow = $("promoDiscountRow");
-  promoRow.hidden = totalDiscount <= 0;
-  promoRow.style.display = totalDiscount > 0 ? "flex" : "none";
-  $("promoDiscount").textContent = totalDiscount > 0 ? `−${money(totalDiscount)}` : money(0);
-
-  // Mostrar también el desglose específico de transferencia, sin volver a sumarlo al total.
+  // Mostrar un solo descuento, únicamente cuando se selecciona transferencia.
   const transferRow = $("transferDiscountRow");
   const showTransfer = transferSelected && totals.transferDiscount > 0;
   transferRow.hidden = !showTransfer;
   transferRow.style.display = showTransfer ? "flex" : "none";
   $("transferDiscountAmount").textContent = showTransfer ? `−${money(totals.transferDiscount)}` : money(0);
+  const promoRow = $("promoDiscountRow");
+  promoRow.hidden = true;
+  promoRow.style.display = "none";
 
   if(!entries.length){
     $("cartItems").innerHTML=`<div class="empty-cart"><div class="empty-icon">🛒</div><h3>Tu carrito está vacío</h3><p>Elegí una prenda y seleccioná el talle que querés.</p><button class="empty-action" id="goCatalog">Ver colección</button></div>`;
@@ -194,7 +163,6 @@ function whatsappUrl(){
   const entries=Object.values(cart);if(!entries.length)return "#";const totals=cartTotals();
   let text="Hola! Quiero hacer el siguiente pedido:%0A%0A";
   entries.forEach(item=>{text+=`• ${encodeURIComponent(item.name)} — Talle ${encodeURIComponent(item.size)} — ${item.quantity} x ${encodeURIComponent(money(item.price))}%0A`;});
-  if(totals.promoDiscount>0)text+=`%0ADescuentos/promociones: -${encodeURIComponent(money(totals.promoDiscount))}`;
   if(totals.transferDiscount>0)text+=`%0ADescuento por transferencia: -${encodeURIComponent(money(totals.transferDiscount))}`;
   text+=`%0A%0A*Total: ${encodeURIComponent(money(totals.total))}*%0A%0AQuedo a la espera de confirmación de disponibilidad.`;
   return `https://wa.me/${WHATSAPP}?text=${text}`;
