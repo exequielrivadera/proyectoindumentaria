@@ -4,22 +4,22 @@ const STORAGE_KEY = "indumentaria_cart_v4";
 // Reemplazá image: null por "img/nombre.jpg" cuando tengas las fotos reales.
 // El stock está separado por talle para que cada variante pueda agotarse de forma independiente.
 const PRODUCTS = [
-  {id:"remera-essential", name:"Remera Essential", category:"remeras", style:"urbana", description:"Remera de algodón de corte limpio y uso diario.", price:28500, image:null, sizes:{XS:2,S:5,M:8,L:6,XL:0}},
-  {id:"remera-boxy", name:"Remera Boxy", category:"remeras", style:"urbana", description:"Calce amplio, hombro caído y estética contemporánea.", price:32000, image:null, sizes:{S:0,M:4,L:3,XL:2}},
-  {id:"remera-sport", name:"Remera Performance", category:"remeras", style:"deportiva", description:"Tejido liviano pensado para entrenamiento y movimiento.", price:36000, image:null, sizes:{S:3,M:5,L:0,XL:2,XXL:1}},
-  {id:"camisa-lino", name:"Camisa Lino", category:"camisas", style:"elegante", description:"Camisa de textura liviana para looks relajados y elegantes.", price:59000, image:null, sizes:{S:2,M:0,L:4,XL:2}},
-  {id:"camisa-oxford", name:"Camisa Oxford", category:"camisas", style:"elegante", description:"Clásico versátil para combinar con prendas urbanas o formales.", price:62000, image:null, sizes:{S:1,M:3,L:3,XL:0}},
-  {id:"chomba-premium", name:"Chomba Premium", category:"chombas", style:"elegante", description:"Chomba de piqué con terminación limpia y calce moderno.", price:48000, image:null, sizes:{S:2,M:5,L:4,XL:1}},
-  {id:"pantalon-cargo", name:"Pantalón Cargo", category:"pantalones", style:"urbana", description:"Bolsillos funcionales y silueta urbana de inspiración utilitaria.", price:68000, image:null, sizes:{38:2,40:4,42:5,44:0,46:1}},
-  {id:"pantalon-sastrero", name:"Pantalón Sastrero", category:"pantalones", style:"elegante", description:"Corte recto y caída limpia para una propuesta más sofisticada.", price:72000, image:null, sizes:{38:1,40:0,42:3,44:2,46:0}},
-  {id:"jogger-sport", name:"Jogger Essential", category:"deportiva", style:"deportiva", description:"Jogger cómodo para entrenamiento, descanso y streetwear.", price:55000, image:null, sizes:{S:3,M:5,L:2,XL:0}},
-  {id:"buzo-hoodie", name:"Hoodie Essential", category:"deportiva", style:"urbana", description:"Buzo con capucha, interior suave y estética minimalista.", price:65000, image:null, sizes:{S:0,M:4,L:4,XL:2}},
-  {id:"campera-urban", name:"Campera Urban", category:"urbana", style:"urbana", description:"Capa liviana para completar looks de ciudad.", price:79000, image:null, sizes:{S:1,M:2,L:0,XL:2}},
-  {id:"blazer-soft", name:"Blazer Soft", category:"elegante", style:"elegante", description:"Sastrería moderna con una construcción más relajada.", price:99000, image:null, sizes:{S:1,M:2,L:1,XL:0}},
-  {id:"gorra-minimal", name:"Gorra Minimal", category:"accesorios", style:"urbana", description:"Gorra de seis paneles con diseño limpio.", price:22000, image:null, sizes:{Única:7}},
-  {id:"cinturon-cuero", name:"Cinturón Cuero", category:"accesorios", style:"elegante", description:"Accesorio clásico para completar looks formales y casuales.", price:34000, image:null, sizes:{85:2,90:0,95:3,100:2,105:1}},
-  {id:"bolso-urban", name:"Bolso Urban", category:"accesorios", style:"urbana", description:"Bolso compacto para uso diario y movimiento en la ciudad.", price:46000, image:null, sizes:{Única:3}},
-  {id:"medias-sport", name:"Medias Sport", category:"accesorios", style:"deportiva", description:"Pack de medias deportivas de uso cotidiano.", price:15000, image:null, sizes:{"39/42":5,"43/46":0}}
+  {id:"remera-essential", name:"Remera Essential", category:"remeras", style:"urbana", description:"Remera de algodón de corte limpio y uso diario.", price:28500, image:"img/remera_essential.jpg", sizes:{XS:2,S:5,M:8,L:6,XL:0}},
+  {id:"remera-boxy", name:"Remera Boxy", category:"remeras", style:"urbana", description:"Calce amplio, hombro caído y estética contemporánea.", price:32000, image:"img/remera_boxy.jpg", sizes:{S:0,M:4,L:3,XL:2}},
+  {id:"remera-sport", name:"Remera Performance", category:"remeras", style:"deportiva", description:"Tejido liviano pensado para entrenamiento y movimiento.", price:36000, image:"img/remera_performance.jpg", sizes:{S:3,M:5,L:0,XL:2,XXL:1}},
+  {id:"camisa-lino", name:"Camisa Lino", category:"camisas", style:"elegante", description:"Camisa de textura liviana para looks relajados y elegantes.", price:59000, image:"img/camisa_lino.jpg", sizes:{S:2,M:0,L:4,XL:2}},
+  {id:"camisa-oxford", name:"Camisa Oxford", category:"camisas", style:"elegante", description:"Clásico versátil para combinar con prendas urbanas o formales.", price:62000, image:"img/camisa_oxford.jpg", sizes:{S:1,M:3,L:3,XL:0}},
+  {id:"chomba-premium", name:"Chomba Premium", category:"chombas", style:"elegante", description:"Chomba de piqué con terminación limpia y calce moderno.", price:48000, image:"img/chomba_premium.jpg", sizes:{S:2,M:5,L:4,XL:1}},
+  {id:"pantalon-cargo", name:"Pantalón Cargo", category:"pantalones", style:"urbana", description:"Bolsillos funcionales y silueta urbana de inspiración utilitaria.", price:68000, image:"img/pantalon_cargo.jpg", sizes:{38:2,40:4,42:5,44:0,46:1}},
+  {id:"pantalon-sastrero", name:"Pantalón Sastrero", category:"pantalones", style:"elegante", description:"Corte recto y caída limpia para una propuesta más sofisticada.", price:72000, image:"img/pantalon_sastrero.jpg", sizes:{38:1,40:0,42:3,44:2,46:0}},
+  {id:"jogger-sport", name:"Jogger Essential", category:"deportiva", style:"deportiva", description:"Jogger cómodo para entrenamiento, descanso y streetwear.", price:55000, image:"img/jogger_essential.jpg", sizes:{S:3,M:5,L:2,XL:0}},
+  {id:"buzo-hoodie", name:"Hoodie Essential", category:"deportiva", style:"urbana", description:"Buzo con capucha, interior suave y estética minimalista.", price:65000, image:"img/hoddie_essential.jpg", sizes:{S:0,M:4,L:4,XL:2}},
+  {id:"campera-urban", name:"Campera Urban", category:"urbana", style:"urbana", description:"Capa liviana para completar looks de ciudad.", price:79000, image:"img/campera_urban.jpg", sizes:{S:1,M:2,L:0,XL:2}},
+  {id:"blazer-soft", name:"Blazer Soft", category:"elegante", style:"elegante", description:"Sastrería moderna con una construcción más relajada.", price:99000, image:"img/blazer_soft.jpg", sizes:{S:1,M:2,L:1,XL:0}},
+  {id:"gorra-minimal", name:"Gorra Minimal", category:"accesorios", style:"urbana", description:"Gorra de seis paneles con diseño limpio.", price:22000, image:"img/gorra_minimal.jpg", sizes:{Única:7}},
+  {id:"cinturon-cuero", name:"Cinturón Cuero", category:"accesorios", style:"elegante", description:"Accesorio clásico para completar looks formales y casuales.", price:34000, image:"img/cinturon_cuero.jpg", sizes:{85:2,90:0,95:3,100:2,105:1}},
+  {id:"bolso-urban", name:"Bolso Urban", category:"accesorios", style:"urbana", description:"Bolso compacto para uso diario y movimiento en la ciudad.", price:46000, image:"img/bolso_urban.jpg", sizes:{Única:3}},
+  {id:"medias-sport", name:"Medias Sport", category:"accesorios", style:"deportiva", description:"Pack de medias deportivas de uso cotidiano.", price:15000, image:"img/medias_sport.jpg", sizes:{"39/42":5,"43/46":0}}
 ];
 
 // Único descuento activo: 10% cuando se selecciona pago por transferencia.
