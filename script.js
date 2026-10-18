@@ -1,579 +1,225 @@
-const PRODUCTS = {
-    "agua-500": {
-        id: "agua-500",
-        name: "Agua mineral 500 ml",
-        category: "aguas",
-        description: "Agua mineral sin gas",
-        price: 900,
-        image: "img/agua_500.jpg"
-    },
-    "agua-gas-500": {
-        id: "agua-gas-500",
-        name: "Agua con gas 500 ml",
-        category: "aguas",
-        description: "Agua mineral con gas",
-        price: 950,
-        image: "img/aguacongas_500.jpg"
-    },
-    "agua-15": {
-        id: "agua-15",
-        name: "Agua mineral 1.5 L",
-        category: "aguas",
-        description: "Ideal para llevar",
-        price: 1300,
-        image: "img/agua_15.jpg",
-        quantityPromo: { min: 6, percent: 10, label: "10% OFF llevando 6" }
-    },
-    "agua-225": {
-        id: "agua-225",
-        name: "Agua mineral 2.25 L",
-        category: "aguas",
-        description: "Presentación familiar",
-        price: 1600,
-        image: "img/agua_225.jpg"
-    },
-    "cocacola-225": {
-        id: "cocacola-225",
-        name: "Coca-Cola 2.25 L",
-        category: "gaseosas",
-        description: "Presentación familiar",
-        price: 3500,
-        image: "img/cocacola_225.jpg"
-    },
-    "cocacola-3l": {
-        id: "cocacola-3l",
-        name: "Coca-Cola 3 L",
-        category: "gaseosas",
-        description: "Presentación familiar",
-        price: 4200,
-        image: "img/cocacola_3l.jpg",
-        quantityPromo: { min: 6, percent: 10, label: "10% OFF llevando 6" }
-    },
-    "cocacola-zero-225": {
-        id: "cocacola-zero-225",
-        name: "Coca-Cola Zero 2.25 L",
-        category: "gaseosas",
-        description: "Sin azúcar",
-        price: 3700,
-        image: "img/cocacola_zero225.jpg"
-    },
-    "pepsi-225": {
-        id: "pepsi-225",
-        name: "Pepsi 2.25 L",
-        category: "gaseosas",
-        description: "Presentación familiar",
-        price: 3000,
-        image: "img/pepsi_225.jpg"
-    },
-    "sprite-225": {
-        id: "sprite-225",
-        name: "Sprite 2.25 L",
-        category: "gaseosas",
-        description: "Sabor lima-limón",
-        price: 3300,
-        image: "img/sprite_225.jpg"
-    },
-    "fanta-225": {
-        id: "fanta-225",
-        name: "Fanta 2.25 L",
-        category: "gaseosas",
-        description: "Sabor naranja",
-        price: 3300,
-        image: "img/fanta_225.jpg"
-    },
-    "quilmes-473": {
-        id: "quilmes-473",
-        name: "Quilmes lata 473 ml",
-        category: "cervezas",
-        description: "Lata 473 ml",
-        price: 2000,
-        image: "img/quilmes_473.jpg",
-        quantityPromo: { min: 6, percent: 8, label: "8% OFF llevando 6" }
-    },
-    "brahma-473": {
-        id: "brahma-473",
-        name: "Brahma lata 473 ml",
-        category: "cervezas",
-        description: "Lata 473 ml",
-        price: 1800,
-        image: "img/brahma_473.png"
-    },
-    "stella-473": {
-        id: "stella-473",
-        name: "Stella Artois lata 473 ml",
-        category: "cervezas",
-        description: "Lata 473 ml",
-        price: 2500,
-        image: "img/stella_473.jpg"
-    },
-    "heineken-710": {
-        id: "heineken-710",
-        name: "Heineken lata 710 ml",
-        category: "cervezas",
-        description: "Lata 710 ml",
-        price: 3200,
-        image: "img/heineken_710.jpg"
-    },
-    "stella-negra-1l": {
-        id: "stella-negra-1l",
-        name: "Stella Artois Negra botella 1 L",
-        category: "cervezas",
-        description: "Botella 1 L",
-        price: 4500,
-        image: "img/stella_1l.jpg"
-    },
-    "smirnoff-1l": {
-        id: "smirnoff-1l",
-        name: "Smirnoff 1 L",
-        category: "vodkas",
-        description: "Botella 1 L",
-        price: 9500,
-        image: "img/smirnoff_1l.jpg"
-    },
-    "fernet-750": {
-        id: "fernet-750",
-        name: "Fernet 750 ml",
-        category: "fernet",
-        description: "Botella 750 ml",
-        price: 10500,
-        image: "img/fernet_750.jpg"
-    },
-    "baggio-1l": {
-        id: "baggio-1l",
-        name: "Baggio Multifruta 1 L",
-        category: "jugos",
-        description: "Jugo multifruta",
-        price: 2400,
-        image: "img/baggiomulti_1l.jpg",
-        quantityPromo: { min: 3, percent: 5, label: "5% OFF llevando 3" }
-    },
-    "cepita-1l": {
-        id: "cepita-1l",
-        name: "Cepita 1 L",
-        category: "jugos",
-        description: "Jugo listo para tomar",
-        price: 2200,
-        image: "img/cepita_1l.png"
-    }
+const WHATSAPP = "5493804507584";
+const STORAGE_KEY = "indumentaria_cart_v4";
+
+// Reemplazá image: null por "img/nombre.jpg" cuando tengas las fotos reales.
+// El stock está separado por talle para que cada variante pueda agotarse de forma independiente.
+const PRODUCTS = [
+  {id:"remera-essential", name:"Remera Essential", category:"remeras", style:"urbana", description:"Remera de algodón de corte limpio y uso diario.", price:28500, image:null, sizes:{XS:2,S:5,M:8,L:6,XL:0}},
+  {id:"remera-boxy", name:"Remera Boxy", category:"remeras", style:"urbana", description:"Calce amplio, hombro caído y estética contemporánea.", price:32000, image:null, sizes:{S:0,M:4,L:3,XL:2}},
+  {id:"remera-sport", name:"Remera Performance", category:"remeras", style:"deportiva", description:"Tejido liviano pensado para entrenamiento y movimiento.", price:36000, image:null, sizes:{S:3,M:5,L:0,XL:2,XXL:1}},
+  {id:"camisa-lino", name:"Camisa Lino", category:"camisas", style:"elegante", description:"Camisa de textura liviana para looks relajados y elegantes.", price:59000, image:null, sizes:{S:2,M:0,L:4,XL:2}},
+  {id:"camisa-oxford", name:"Camisa Oxford", category:"camisas", style:"elegante", description:"Clásico versátil para combinar con prendas urbanas o formales.", price:62000, image:null, sizes:{S:1,M:3,L:3,XL:0}},
+  {id:"chomba-premium", name:"Chomba Premium", category:"chombas", style:"elegante", description:"Chomba de piqué con terminación limpia y calce moderno.", price:48000, image:null, sizes:{S:2,M:5,L:4,XL:1}},
+  {id:"pantalon-cargo", name:"Pantalón Cargo", category:"pantalones", style:"urbana", description:"Bolsillos funcionales y silueta urbana de inspiración utilitaria.", price:68000, image:null, sizes:{38:2,40:4,42:5,44:0,46:1}},
+  {id:"pantalon-sastrero", name:"Pantalón Sastrero", category:"pantalones", style:"elegante", description:"Corte recto y caída limpia para una propuesta más sofisticada.", price:72000, image:null, sizes:{38:1,40:0,42:3,44:2,46:0}},
+  {id:"jogger-sport", name:"Jogger Essential", category:"deportiva", style:"deportiva", description:"Jogger cómodo para entrenamiento, descanso y streetwear.", price:55000, image:null, sizes:{S:3,M:5,L:2,XL:0}},
+  {id:"buzo-hoodie", name:"Hoodie Essential", category:"deportiva", style:"urbana", description:"Buzo con capucha, interior suave y estética minimalista.", price:65000, image:null, sizes:{S:0,M:4,L:4,XL:2}},
+  {id:"campera-urban", name:"Campera Urban", category:"urbana", style:"urbana", description:"Capa liviana para completar looks de ciudad.", price:79000, image:null, sizes:{S:1,M:2,L:0,XL:2}},
+  {id:"blazer-soft", name:"Blazer Soft", category:"elegante", style:"elegante", description:"Sastrería moderna con una construcción más relajada.", price:99000, image:null, sizes:{S:1,M:2,L:1,XL:0}},
+  {id:"gorra-minimal", name:"Gorra Minimal", category:"accesorios", style:"urbana", description:"Gorra de seis paneles con diseño limpio.", price:22000, image:null, sizes:{Única:7}},
+  {id:"cinturon-cuero", name:"Cinturón Cuero", category:"accesorios", style:"elegante", description:"Accesorio clásico para completar looks formales y casuales.", price:34000, image:null, sizes:{85:2,90:0,95:3,100:2,105:1}},
+  {id:"bolso-urban", name:"Bolso Urban", category:"accesorios", style:"urbana", description:"Bolso compacto para uso diario y movimiento en la ciudad.", price:46000, image:null, sizes:{Única:3}},
+  {id:"medias-sport", name:"Medias Sport", category:"accesorios", style:"deportiva", description:"Pack de medias deportivas de uso cotidiano.", price:15000, image:null, sizes:{"39/42":5,"43/46":0}}
+];
+
+// PROMOCIONES: se pueden modificar desde este bloque cuando exista el catálogo real.
+const PROMOTIONS = {
+  selected2x1: ["medias-sport"], // 2x1 en productos seleccionados
+  remerasDiscount: 0.15,          // 15% llevando 2 o más remeras, aunque sean modelos distintos
+  transferDiscount: 0.10          // 10% pagando por transferencia
 };
 
-const WHATSAPP_NUMBER = "5493804507584";
-const STORAGE_KEY = "distribuidora-demo-carrito";
-
-const COMBO = {
-    id: "fernet-coca",
-    fernetId: "fernet-750",
-    cocaId: "cocacola-3l",
-    comboPrice: 12900,
-    normalPrice: PRODUCTS["fernet-750"].price + PRODUCTS["cocacola-3l"].price,
-    label: "Combo Fernet + Coca-Cola 3 L"
-};
-
-let cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+let cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+let activeProduct = null;
+let activeSize = null;
+let modalQuantity = 1;
 let activeCategory = "todos";
+let activeSizeFilter = "todos";
+let searchTerm = "";
+let transferSelected = false;
 
-const cartPanel = document.getElementById("cartPanel");
-const cartOverlay = document.getElementById("cartOverlay");
-const cartItems = document.getElementById("cartItems");
-const cartSubtotal = document.getElementById("cartSubtotal");
-const cartDiscount = document.getElementById("cartDiscount");
-const discountRow = document.getElementById("discountRow");
-const cartTotal = document.getElementById("cartTotal");
-const cartCount = document.getElementById("cartCount");
-const checkoutWhatsApp = document.getElementById("checkoutWhatsApp");
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
-const productosGrid = document.getElementById("productosGrid");
+const $ = id => document.getElementById(id);
+const productsGrid = $("productosGrid");
 
-function formatPrice(value) {
-    return new Intl.NumberFormat("es-AR", {
-        style: "currency",
-        currency: "ARS",
-        maximumFractionDigits: 0
-    }).format(value);
+function money(value){ return new Intl.NumberFormat("es-AR", {style:"currency",currency:"ARS",maximumFractionDigits:0}).format(value); }
+function productById(id){ return PRODUCTS.find(p=>p.id===id); }
+function stockFor(product,size){ return Number(product?.sizes?.[size] || 0); }
+function totalStock(product){ return Object.values(product.sizes).reduce((a,b)=>a+Number(b),0); }
+function sizeEntries(product){ return Object.entries(product.sizes); }
+function categoryName(cat){ const map={remeras:"Remeras",camisas:"Camisas",chombas:"Chombas",pantalones:"Pantalones",deportiva:"Deportiva",urbana:"Urbana",elegante:"Elegante",accesorios:"Accesorios"}; return map[cat]||cat; }
+function placeholder(product){
+  const labels={remeras:"REMERA",camisas:"CAMISA",chombas:"CHOMBA",pantalones:"PANTALÓN",deportiva:"SPORT",urbana:"URBANA",elegante:"ELEGANTE",accesorios:"ACCESSORY"};
+  return `<div class="image-placeholder ${product.style}"><span>${labels[product.category]||"INDUMENTARIA"}</span><strong>INDUMENTARIA</strong></div>`;
+}
+function imageMarkup(product, cls=""){ return product.image ? `<img class="${cls}" src="${product.image}" alt="${product.name}" loading="lazy">` : placeholder(product); }
+function availableSizes(product){ return sizeEntries(product).filter(([,stock])=>stock>0); }
+
+function filteredProducts(){
+  return PRODUCTS.filter(product=>{
+    const categoryMatch = activeCategory === "todos" || product.category===activeCategory || product.style===activeCategory;
+    const sizeMatch = activeSizeFilter === "todos" || stockFor(product, activeSizeFilter)>0;
+    const haystack = `${product.name} ${product.description} ${categoryName(product.category)} ${product.style}`.toLowerCase();
+    const searchMatch = !searchTerm || haystack.includes(searchTerm.toLowerCase());
+    return categoryMatch && sizeMatch && searchMatch;
+  });
 }
 
-function saveCart() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+function renderActiveFilters(){
+  const chips=[];
+  if(activeCategory!=="todos") chips.push(`<span class="filter-chip">${categoryName(activeCategory)} <button data-clear-filter="category" aria-label="Quitar filtro de categoría">×</button></span>`);
+  if(activeSizeFilter!=="todos") chips.push(`<span class="filter-chip">Talle ${activeSizeFilter} <button data-clear-filter="size" aria-label="Quitar filtro de talle">×</button></span>`);
+  if(searchTerm) chips.push(`<span class="filter-chip">“${escapeHtml(searchTerm)}” <button data-clear-filter="search" aria-label="Quitar búsqueda">×</button></span>`);
+  $("activeFilters").innerHTML=chips.join("");
+}
+function escapeHtml(value){return String(value).replace(/[&<>'"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[char]));}
+
+function renderProducts(){
+  const list=filteredProducts();
+  productsGrid.innerHTML=list.map(product=>{
+    const stock=totalStock(product), available=availableSizes(product), low=stock>0&&stock<=3;
+    return `<article class="product-card ${stock===0?'sold-out':''}">
+      <button class="product-visual" data-open-product="${product.id}" aria-label="Ver ${product.name}">
+        ${imageMarkup(product)}
+        ${stock===0?'<span class="sold-badge">AGOTADO</span>':low?'<span class="low-badge">ÚLTIMAS UNIDADES</span>':''}
+      </button>
+      <div class="product-content">
+        <span class="product-category">${categoryName(product.category)}</span>
+        <h3>${product.name}</h3><p>${product.description}</p>
+        <div class="product-bottom"><strong>${money(product.price)}</strong><span>${stock===0?'Sin stock':`${available.length} ${available.length===1?'talle disponible':'talles disponibles'}`}</span></div>
+        <button class="quick-add" data-open-product="${product.id}" ${stock===0?'disabled':''}>${stock===0?'Sin stock':'Ver talles y agregar'}</button>
+      </div>
+    </article>`;
+  }).join("");
+  $("noResults").hidden=list.length!==0;
+  renderActiveFilters();
 }
 
-function getCartEntries() {
-    return Object.values(cart).filter(item => item.quantity > 0);
+function calculatePromotions(){
+  const entries=Object.values(cart);
+  let promoDiscount=0;
+
+  // 2x1: cada dos unidades del mismo producto seleccionado, una se bonifica.
+  PROMOTIONS.selected2x1.forEach(productId=>{
+    const qty=entries.filter(i=>i.productId===productId).reduce((sum,i)=>sum+i.quantity,0);
+    const product=productById(productId);
+    if(product && qty>=2) promoDiscount += Math.floor(qty/2)*product.price;
+  });
+
+  // 15% llevando dos o más remeras, aunque sean modelos diferentes.
+  const remeraEntries=entries.filter(i=>productById(i.productId)?.category==="remeras");
+  const remeraQty=remeraEntries.reduce((sum,i)=>sum+i.quantity,0);
+  if(remeraQty>=2){
+    promoDiscount += remeraEntries.reduce((sum,i)=>sum+i.price*i.quantity,0)*PROMOTIONS.remerasDiscount;
+  }
+
+  return promoDiscount;
 }
 
-function getCartCount() {
-    return getCartEntries().reduce((total, item) => total + item.quantity, 0);
+function cartTotals(){
+  const subtotal=Object.values(cart).reduce((sum,i)=>sum+i.price*i.quantity,0);
+  const promoDiscount=Math.min(calculatePromotions(),subtotal);
+  const transferDiscount=transferSelected ? Math.round((subtotal-promoDiscount)*PROMOTIONS.transferDiscount) : 0;
+  return {subtotal,promoDiscount,transferDiscount,total:subtotal-promoDiscount-transferDiscount};
 }
 
-function addToCart(productId, quantity = 1, shouldOpen = true) {
-    const product = PRODUCTS[productId];
+function renderCart(){
+  const entries=Object.values(cart), count=entries.reduce((sum,i)=>sum+i.quantity,0), totals=cartTotals();
+  $("cartCount").textContent=count;
+  $("cartAmount").textContent=money(totals.total);
+  $("cartSubtotal").textContent=money(totals.subtotal);
+  $("cartTotal").textContent=money(totals.total);
+  // Calcular el descuento mostrado desde subtotal - total para que coincida siempre
+  // con el importe final, incluyendo promociones y transferencia.
+  const totalDiscount = Math.max(0, totals.subtotal - totals.total);
+  const promoRow = $("promoDiscountRow");
+  promoRow.hidden = totalDiscount <= 0;
+  promoRow.style.display = totalDiscount > 0 ? "flex" : "none";
+  $("promoDiscount").textContent = totalDiscount > 0 ? `−${money(totalDiscount)}` : money(0);
 
-    if (!product) return;
+  // Mostrar también el desglose específico de transferencia, sin volver a sumarlo al total.
+  const transferRow = $("transferDiscountRow");
+  const showTransfer = transferSelected && totals.transferDiscount > 0;
+  transferRow.hidden = !showTransfer;
+  transferRow.style.display = showTransfer ? "flex" : "none";
+  $("transferDiscountAmount").textContent = showTransfer ? `−${money(totals.transferDiscount)}` : money(0);
 
-    if (cart[productId]) {
-        cart[productId].quantity += quantity;
-    } else {
-        cart[productId] = {
-            ...product,
-            quantity
-        };
-    }
-
-    saveCart();
-    renderCart();
-
-    if (shouldOpen) {
-        openCart();
-    }
+  if(!entries.length){
+    $("cartItems").innerHTML=`<div class="empty-cart"><div class="empty-icon">🛒</div><h3>Tu carrito está vacío</h3><p>Elegí una prenda y seleccioná el talle que querés.</p><button class="empty-action" id="goCatalog">Ver colección</button></div>`;
+    $("checkoutWhatsApp").classList.add("disabled"); $("checkoutWhatsApp").href="#";
+  }else{
+    $("checkoutWhatsApp").classList.remove("disabled");
+    $("cartItems").innerHTML=entries.map(item=>`<div class="cart-item">
+      <div class="cart-item-thumb">${item.image?`<img src="${item.image}" alt="">`:placeholder(productById(item.productId))}</div>
+      <div class="cart-item-main"><div><h3>${item.name}</h3><span>Talle ${item.size}</span></div><button class="remove-item" data-remove="${item.key}" aria-label="Eliminar">×</button><strong>${money(item.price*item.quantity)}</strong>
+      <div class="cart-qty"><button data-qty="${item.key}" data-delta="-1">−</button><span>${item.quantity}</span><button data-qty="${item.key}" data-delta="1">+</button></div></div>
+    </div>`).join("");
+    $("checkoutWhatsApp").href=whatsappUrl();
+  }
 }
 
-function changeQuantity(productId, amount) {
-    if (!cart[productId]) return;
+function saveCart(){localStorage.setItem(STORAGE_KEY,JSON.stringify(cart));renderCart();}
+function openCart(){$("cartPanel").classList.add("open");$("cartOverlay").classList.add("show");$("cartPanel").setAttribute("aria-hidden","false");document.body.classList.add("no-scroll");}
+function closeCart(){$("cartPanel").classList.remove("open");$("cartOverlay").classList.remove("show");$("cartPanel").setAttribute("aria-hidden","true");document.body.classList.remove("no-scroll");}
 
-    cart[productId].quantity += amount;
-
-    if (cart[productId].quantity <= 0) {
-        delete cart[productId];
-    }
-
-    saveCart();
-    renderCart();
+function openProduct(id){
+  activeProduct=productById(id); if(!activeProduct)return;
+  activeSize=availableSizes(activeProduct)[0]?.[0]||null; modalQuantity=1;
+  $("modalCategory").textContent=categoryName(activeProduct.category);$("modalName").textContent=activeProduct.name;$("modalDescription").textContent=activeProduct.description;$("modalPrice").textContent=money(activeProduct.price);$("modalImage").innerHTML=imageMarkup(activeProduct);
+  renderSizes();renderModalQuantity();renderStockStatus();$("productModal").classList.add("open");$("productModal").setAttribute("aria-hidden","false");document.body.classList.add("no-scroll");
 }
-
-function removeFromCart(productId) {
-    delete cart[productId];
-    saveCart();
-    renderCart();
+function closeProduct(){$("productModal").classList.remove("open");$("productModal").setAttribute("aria-hidden","true");document.body.classList.remove("no-scroll");}
+function renderSizes(){
+  $("sizeSelector").innerHTML=sizeEntries(activeProduct).map(([size,stock])=>`<button class="size-btn ${size===activeSize?'selected':''} ${stock===0?'out':''}" data-size="${size}" ${stock===0?'disabled':''}><span>${size}</span>${stock===0?'<small>Sin stock</small>':stock<=2?'<small>Últimas</small>':''}</button>`).join("");
 }
-
-function clearCart() {
-    cart = {};
-    saveCart();
-    renderCart();
+function renderModalQuantity(){$("modalQuantity").textContent=modalQuantity;}
+function renderStockStatus(){
+  const stock=stockFor(activeProduct,activeSize);
+  if(!activeSize||stock===0){$("stockStatus").innerHTML='<span class="status-out">Este talle no tiene stock.</span>';$('addModal').disabled=true;return;}
+  const inCart=cart[`${activeProduct.id}__${activeSize}`]?.quantity||0,remaining=stock-inCart;
+  if(remaining<=0){$("stockStatus").innerHTML='<span class="status-out">Ya agregaste todo el stock disponible de este talle.</span>';$('addModal').disabled=true;}
+  else if(remaining<=2){$("stockStatus").innerHTML=`<span class="status-low">Últimas ${remaining} ${remaining===1?'unidad':'unidades'} disponibles.</span>`;$('addModal').disabled=false;}
+  else{$("stockStatus").innerHTML=`<span class="status-ok">${remaining} unidades disponibles.</span>`;$('addModal').disabled=false;}
 }
-
-function calculateTotals() {
-    const entries = getCartEntries();
-    const subtotal = entries.reduce((total, item) => total + item.price * item.quantity, 0);
-
-    let discount = 0;
-    const details = {};
-
-    entries.forEach(item => {
-        details[item.id] = {
-            quantity: item.quantity,
-            quantityDiscount: 0,
-            comboDiscount: 0,
-            comboUnits: 0
-        };
-    });
-
-    // Primero aplicamos el combo para que no se duplique el descuento de Coca-Cola 3 L.
-    const fernetQuantity = cart[COMBO.fernetId]?.quantity || 0;
-    const cocaQuantity = cart[COMBO.cocaId]?.quantity || 0;
-    const comboUnits = Math.min(fernetQuantity, cocaQuantity);
-
-    if (comboUnits > 0) {
-        const comboSavingPerUnit = COMBO.normalPrice - COMBO.comboPrice;
-        const comboDiscount = comboUnits * comboSavingPerUnit;
-        discount += comboDiscount;
-
-        details[COMBO.fernetId].comboUnits = comboUnits;
-        details[COMBO.cocaId].comboUnits = comboUnits;
-        // Mostramos el ahorro del combo sobre la línea de Coca-Cola para
-        // evitar descontar el mismo importe dos veces en la vista del carrito.
-        details[COMBO.cocaId].comboDiscount = comboDiscount;
-    }
-
-    // Promociones por cantidad. Se aplican sobre unidades que no fueron usadas en el combo.
-    entries.forEach(item => {
-        if (!item.quantityPromo) return;
-
-        const unitsUsedInCombo = item.id === COMBO.fernetId || item.id === COMBO.cocaId
-            ? details[item.id].comboUnits
-            : 0;
-        const eligibleQuantity = item.quantity - unitsUsedInCombo;
-
-        if (eligibleQuantity >= item.quantityPromo.min) {
-            const quantityDiscount = item.price * eligibleQuantity * (item.quantityPromo.percent / 100);
-            discount += quantityDiscount;
-            details[item.id].quantityDiscount = quantityDiscount;
-        }
-    });
-
-    return {
-        subtotal,
-        discount,
-        total: subtotal - discount,
-        details,
-        comboUnits
-    };
+function addSelected(){
+  if(!activeProduct||!activeSize)return;
+  const stock=stockFor(activeProduct,activeSize),key=`${activeProduct.id}__${activeSize}`,current=cart[key]?.quantity||0;
+  if(current+modalQuantity>stock){showToast("No hay suficiente stock para ese talle.");return;}
+  cart[key]={key,productId:activeProduct.id,name:activeProduct.name,size:activeSize,price:activeProduct.price,image:activeProduct.image,quantity:current+modalQuantity};saveCart();closeProduct();showToast(`${activeProduct.name} agregado al carrito.`);
 }
-
-function getProductPromoText(product) {
-    if (product.id === COMBO.fernetId || product.id === COMBO.cocaId) {
-        return "Combo con Fernet + Coca-Cola 3 L";
-    }
-
-    if (product.quantityPromo) {
-        return product.quantityPromo.label;
-    }
-
-    return "";
+function changeCartQuantity(key,delta){
+  const item=cart[key];if(!item)return;const product=productById(item.productId),max=stockFor(product,item.size),next=item.quantity+delta;
+  if(next<=0)delete cart[key];else if(next<=max)item.quantity=next;else{showToast("Alcanzaste el stock disponible de este talle.");return;}saveCart();
 }
-
-function renderProducts() {
-    const products = Object.values(PRODUCTS).filter(product => {
-        return activeCategory === "todos" || product.category === activeCategory;
-    });
-
-    if (products.length === 0) {
-        productosGrid.innerHTML = `<p class="no-products">No hay productos en esta categoría.</p>`;
-        return;
-    }
-
-    productosGrid.innerHTML = products.map(product => {
-        const promoText = getProductPromoText(product);
-        const isComboProduct = product.id === COMBO.fernetId || product.id === COMBO.cocaId;
-
-        return `
-            <article class="producto">
-                <div class="producto-image">
-                    <img src="${product.image}" alt="${product.name}" loading="lazy">
-                    ${product.quantityPromo || isComboProduct ? `<span class="product-tag">${isComboProduct ? "COMBO" : "PROMO"}</span>` : ""}
-                </div>
-                <div class="producto-info">
-                    <span class="product-category">${getCategoryLabel(product.category)}</span>
-                    <h3>${product.name}</h3>
-                    <p>${product.description}</p>
-                    <div class="producto-bottom">
-                        <strong>${formatPrice(product.price)}</strong>
-                        <button class="add-cart" data-id="${product.id}">Agregar</button>
-                    </div>
-                    ${promoText ? `<div class="product-promo">${promoText}</div>` : ""}
-                </div>
-            </article>
-        `;
-    }).join("");
+function whatsappUrl(){
+  const entries=Object.values(cart);if(!entries.length)return "#";const totals=cartTotals();
+  let text="Hola! Quiero hacer el siguiente pedido:%0A%0A";
+  entries.forEach(item=>{text+=`• ${encodeURIComponent(item.name)} — Talle ${encodeURIComponent(item.size)} — ${item.quantity} x ${encodeURIComponent(money(item.price))}%0A`;});
+  if(totals.promoDiscount>0)text+=`%0ADescuentos/promociones: -${encodeURIComponent(money(totals.promoDiscount))}`;
+  if(totals.transferDiscount>0)text+=`%0ADescuento por transferencia: -${encodeURIComponent(money(totals.transferDiscount))}`;
+  text+=`%0A%0A*Total: ${encodeURIComponent(money(totals.total))}*%0A%0AQuedo a la espera de confirmación de disponibilidad.`;
+  return `https://wa.me/${WHATSAPP}?text=${text}`;
 }
+function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove("show"),2600);}
+function resetFilters(){activeCategory="todos";activeSizeFilter="todos";searchTerm="";$("productSearch").value="";$("sizeFilter").value="todos";document.querySelectorAll(".category-btn").forEach(b=>b.classList.toggle("active",b.dataset.category==="todos"));renderProducts();}
 
-function getCategoryLabel(category) {
-    const labels = {
-        aguas: "Aguas",
-        gaseosas: "Gaseosas",
-        cervezas: "Cervezas",
-        vodkas: "Vodkas",
-        fernet: "Fernet",
-        jugos: "Jugos"
-    };
+$("categoryBar").addEventListener("click",e=>{const btn=e.target.closest("[data-category]");if(!btn)return;activeCategory=btn.dataset.category;document.querySelectorAll(".category-btn").forEach(b=>b.classList.toggle("active",b===btn));renderProducts();});
+productsGrid.addEventListener("click",e=>{const btn=e.target.closest("[data-open-product]");if(btn)openProduct(btn.dataset.openProduct);});
+document.querySelectorAll("[data-feature-category]").forEach(a=>a.addEventListener("click",()=>{activeCategory=a.dataset.featureCategory;document.querySelectorAll(".category-btn").forEach(b=>b.classList.toggle("active",b.dataset.category===activeCategory));renderProducts();}));
+$("productSearch").addEventListener("input",e=>{searchTerm=e.target.value.trim();renderProducts();});
+$("sizeFilter").addEventListener("change",e=>{activeSizeFilter=e.target.value;renderProducts();});
+$("activeFilters").addEventListener("click",e=>{const btn=e.target.closest("[data-clear-filter]");if(!btn)return;const type=btn.dataset.clearFilter;if(type==="category")activeCategory="todos";if(type==="size"){$("sizeFilter").value="todos";activeSizeFilter="todos";}if(type==="search"){$("productSearch").value="";searchTerm="";}document.querySelectorAll(".category-btn").forEach(b=>b.classList.toggle("active",b.dataset.category===activeCategory));renderProducts();});
+$("clearFilters").addEventListener("click",resetFilters);
+$("sizeSelector").addEventListener("click",e=>{const btn=e.target.closest("[data-size]");if(!btn)return;activeSize=btn.dataset.size;modalQuantity=1;renderSizes();renderModalQuantity();renderStockStatus();});
+$("addModal").addEventListener("click",addSelected);
+$("modalMinus").addEventListener("click",()=>{modalQuantity=Math.max(1,modalQuantity-1);renderModalQuantity();});
+$("modalPlus").addEventListener("click",()=>{if(activeProduct&&activeSize&&modalQuantity<stockFor(activeProduct,activeSize)){modalQuantity++;renderModalQuantity();}else showToast("No hay más stock disponible para ese talle.");});
+$("openCart").addEventListener("click",openCart);$("closeCart").addEventListener("click",closeCart);$("cartOverlay").addEventListener("click",closeCart);
+$("closeModal").addEventListener("click",closeProduct);$("modalBackdrop").addEventListener("click",closeProduct);
+$("clearCart").addEventListener("click",()=>{cart={};saveCart();showToast("Carrito vaciado.");});
+$("transferDiscount").addEventListener("change",e=>{transferSelected=e.target.checked;renderCart();});
+$("cartItems").addEventListener("click",e=>{const q=e.target.closest("[data-qty]"),r=e.target.closest("[data-remove]");if(q)changeCartQuantity(q.dataset.qty,Number(q.dataset.delta));if(r){delete cart[r.dataset.remove];saveCart();}const go=e.target.closest("#goCatalog");if(go){closeCart();$("coleccion").scrollIntoView({behavior:"smooth"});}});
+$("menuToggle").addEventListener("click",()=>{const open=$("navLinks").classList.toggle("open");$("menuToggle").setAttribute("aria-expanded",open);});
+document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>{$("navLinks").classList.remove("open");$("menuToggle").setAttribute("aria-expanded","false");}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeProduct();}});
 
-    return labels[category] || "Bebidas";
-}
-
-function renderCart() {
-    const entries = getCartEntries();
-    const count = getCartCount();
-    const totals = calculateTotals();
-
-    cartCount.textContent = count;
-    cartSubtotal.textContent = formatPrice(totals.subtotal);
-    cartDiscount.textContent = `-${formatPrice(totals.discount).replace("-", "")}`;
-    cartTotal.textContent = formatPrice(totals.total);
-    discountRow.classList.toggle("visible", totals.discount > 0);
-
-    if (entries.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                <div class="empty-cart-icon">🛒</div>
-                <h3>Tu carrito está vacío</h3>
-                <p>Agregá algunos productos para comenzar tu pedido.</p>
-            </div>
-        `;
-
-        checkoutWhatsApp.classList.add("disabled");
-        checkoutWhatsApp.href = "#";
-        return;
-    }
-
-    cartItems.innerHTML = entries.map(item => {
-        const detail = totals.details[item.id];
-        const itemSubtotal = item.price * item.quantity;
-        const itemDiscount = detail.quantityDiscount + (detail.comboDiscount || 0);
-        const itemFinal = itemSubtotal - itemDiscount;
-        const comboUnits = detail.comboUnits || 0;
-
-        let promoHtml = "";
-
-        if (comboUnits > 0) {
-            promoHtml += `<div class="cart-promo">${comboUnits} combo(s) aplicado(s)</div>`;
-        }
-
-        if (detail.quantityDiscount > 0) {
-            promoHtml += `<div class="cart-promo">-${formatPrice(detail.quantityDiscount)} por cantidad</div>`;
-        }
-
-        return `
-            <div class="cart-item">
-                <div class="cart-item-image">
-                    <img src="${item.image}" alt="${item.name}">
-                </div>
-
-                <div class="cart-item-main">
-                    <div class="cart-item-title">${item.name}</div>
-                    <div class="cart-item-price">${formatPrice(item.price)} por unidad</div>
-
-                    ${promoHtml}
-
-                    <div class="cart-item-actions">
-                        <div>
-                            <div class="quantity-control">
-                                <button type="button" data-action="decrease" data-id="${item.id}" aria-label="Disminuir cantidad">−</button>
-                                <span>${item.quantity}</span>
-                                <button type="button" data-action="increase" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
-                            </div>
-
-                            <button class="remove-item" type="button" data-action="remove" data-id="${item.id}">Eliminar</button>
-                        </div>
-
-                        <div class="item-prices">
-                            ${itemDiscount > 0 ? `<span class="item-original">${formatPrice(itemSubtotal)}</span>` : ""}
-                            <span class="item-subtotal">${formatPrice(itemFinal)}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join("");
-
-    checkoutWhatsApp.classList.remove("disabled");
-    checkoutWhatsApp.href = buildWhatsAppLink(totals);
-}
-
-function buildWhatsAppLink(totals = calculateTotals()) {
-    const entries = getCartEntries();
-    let message = "Hola! Quiero hacer el siguiente pedido:\n\n";
-
-    entries.forEach(item => {
-        const detail = totals.details[item.id];
-        const itemSubtotal = item.price * item.quantity;
-        const itemDiscount = detail.quantityDiscount + (detail.comboDiscount || 0);
-        const finalItemTotal = itemSubtotal - itemDiscount;
-
-        message += `• ${item.name} x${item.quantity} - ${formatPrice(finalItemTotal)}`;
-
-        if (detail.comboUnits > 0) {
-            message += ` (incluye ${detail.comboUnits} combo)`;
-        }
-
-        if (detail.quantityDiscount > 0) {
-            message += ` (promo cantidad aplicada)`;
-        }
-
-        message += "\n";
-    });
-
-    message += `\nSubtotal: ${formatPrice(totals.subtotal)}\n`;
-    message += `Descuentos: -${formatPrice(totals.discount)}\n`;
-    message += `TOTAL: ${formatPrice(totals.total)}`;
-
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
-
-function openCart() {
-    cartPanel.classList.add("active");
-    cartOverlay.classList.add("active");
-    cartPanel.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-}
-
-function closeCart() {
-    cartPanel.classList.remove("active");
-    cartOverlay.classList.remove("active");
-    cartPanel.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-}
-
-function addPromoProduct(productId) {
-    addToCart(productId, 1, true);
-}
-
-function addPromoCombo() {
-    addToCart(COMBO.fernetId, 1, false);
-    addToCart(COMBO.cocaId, 1, false);
-    renderCart();
-    openCart();
-}
-
-document.addEventListener("click", event => {
-    const addButton = event.target.closest(".add-cart");
-    if (addButton) {
-        addToCart(addButton.dataset.id);
-        return;
-    }
-
-    const promoProduct = event.target.closest("[data-promo-product]");
-    if (promoProduct) {
-        addPromoProduct(promoProduct.dataset.promoProduct);
-        return;
-    }
-
-    const promoCombo = event.target.closest("[data-promo-combo]");
-    if (promoCombo) {
-        addPromoCombo();
-    }
-});
-
-cartItems.addEventListener("click", event => {
-    const button = event.target.closest("button[data-action]");
-    if (!button) return;
-
-    const { action, id } = button.dataset;
-
-    if (action === "increase") changeQuantity(id, 1);
-    if (action === "decrease") changeQuantity(id, -1);
-    if (action === "remove") removeFromCart(id);
-});
-
-document.querySelectorAll(".category-btn").forEach(button => {
-    button.addEventListener("click", () => {
-        activeCategory = button.dataset.category;
-
-        document.querySelectorAll(".category-btn").forEach(categoryButton => {
-            categoryButton.classList.toggle("active", categoryButton === button);
-        });
-
-        renderProducts();
-    });
-});
-
-document.getElementById("openCart").addEventListener("click", openCart);
-document.getElementById("closeCart").addEventListener("click", closeCart);
-cartOverlay.addEventListener("click", closeCart);
-
-document.getElementById("clearCart").addEventListener("click", () => {
-    if (getCartEntries().length === 0) return;
-    clearCart();
-});
-
-menuToggle.addEventListener("click", () => {
-    const isOpen = navLinks.classList.toggle("active");
-    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-});
-
-navLinks.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
-    });
-});
-
-document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-        closeCart();
-        navLinks.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
-    }
-});
-
-renderProducts();
-renderCart();
+renderProducts();renderCart();

@@ -1,206 +1,159 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Distribuidora - Bebidas, promociones y pedidos por WhatsApp.">
-    <title>Distribuidora | Bebidas y más</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="INDUMENTARIA · Ropa urbana, deportiva, elegante y accesorios.">
+  <title>INDUMENTARIA | Tienda de ropa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Didact+Gothic&family=Khand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261018-2">
 </head>
 <body>
+  <nav class="menu" id="mainNav">
+    <a href="#inicio" class="logo">INDUMENTARIA</a>
+    <div class="menu-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#destacados">Destacados</a></li>
+        <li><a href="#coleccion">Colección</a></li>
+      </ul>
+      <button class="cart-button" id="openCart" aria-label="Abrir carrito">
+        <span class="cart-symbol" aria-hidden="true">🛒</span>
+        <span class="cart-amount" id="cartAmount">$0</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
 
-    <!-- NAVEGACIÓN -->
-    <nav class="menu">
-        <a href="#inicio" class="logo">DISTRIBUIDORA</a>
+  <header class="hero" id="inicio">
+    <div class="hero-content">
+      <span class="eyebrow">Indumentaria · Accesorios · Estilo</span>
+      <h1><span>VESTÍ TU</span><span>PROPIA HISTORIA</span></h1>
+      <p>Prendas urbanas, deportivas y elegantes pensadas para acompañarte en cada momento.</p>
+      <div class="hero-actions">
+        <a href="#coleccion" class="btn btn-dark">Ver colección</a>
+        <a href="#destacados" class="btn btn-outline">Ver destacados</a>
+      </div>
+    </div>
+  </header>
 
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+  <section class="editorial-strip">
+    <div><strong>URBANA</strong><span>Todos los días</span></div>
+    <div><strong>SPORT</strong><span>Movimiento</span></div>
+    <div><strong>ESSENTIAL</strong><span>Clásicos</span></div>
+    <div><strong>ACCESSORIES</strong><span>Detalles</span></div>
+  </section>
 
-        <div class="menu-right">
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#promociones">Promociones</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
+  <section class="promos" id="promociones">
+    <div class="section-heading promo-heading">
+      <div><span class="eyebrow">Beneficios</span><h2>PROMOCIONES</h2></div>
+      <p>Promociones disponibles para vos.</p>
+    </div>
+    <div class="promo-grid">
+      <article class="promo-card promo-rose"><span>01</span><h3>2X1</h3><p>En productos seleccionados.</p></article>
+      <article class="promo-card promo-sage"><span>02</span><h3>2 REMERAS</h3><p>Descuento aunque sean modelos diferentes.</p></article>
+      <article class="promo-card promo-lav"><span>03</span><h3>TRANSFERENCIA</h3><p>Descuento especial pagando por transferencia.</p></article>
+    </div>
+  </section>
 
-            <div class="cart-wrapper">
-                <button class="cart-button" id="openCart" aria-label="Abrir carrito">
-                    <span class="cart-icon">🛒</span>
-                    <span>Carrito</span>
-                </button>
-                <span class="cart-count" id="cartCount">0</span>
-            </div>
-        </div>
-    </nav>
+  <section class="featured" id="destacados">
+    <div class="section-heading">
+      <div><span class="eyebrow">Selección de la temporada</span><h2>DESTACADOS</h2></div>
+      <p>Una selección de prendas y accesorios para darle personalidad a tu look.</p>
+    </div>
+    <div class="featured-grid">
+      <article class="feature-card feature-sport"><span>01 / SPORT</span><h3>Movimiento<br>sin límites.</h3><a href="#coleccion" data-feature-category="deportiva">Explorar</a></article>
+      <article class="feature-card feature-urban"><span>02 / URBANA</span><h3>Tu estilo.<br>Tu calle.</h3><a href="#coleccion" data-feature-category="urbana">Explorar</a></article>
+      <article class="feature-card feature-elegant"><span>03 / ELEGANTE</span><h3>Menos ruido.<br>Más presencia.</h3><a href="#coleccion" data-feature-category="elegante">Explorar</a></article>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <header id="inicio" class="hero">
-        <div class="hero-content">
-            <span class="hero-kicker">Bebidas • Ofertas • Pedidos</span>
-            <h1>TODO PARA TU PEDIDO</h1>
-            <p>Gaseosas, aguas, cervezas, fernet, vodkas y jugos. Armá tu carrito y recibí tu pedido por WhatsApp.</p>
-            <div class="hero-actions">
-                <a href="#productos" class="btn btn-dark">Ver productos</a>
-                <a href="#promociones" class="btn btn-light">Ver promociones</a>
-            </div>
-        </div>
-    </header>
+  <section class="productos" id="coleccion">
+    <div class="section-heading catalog-heading">
+      <div><span class="eyebrow">Tienda online</span><h2>LA COLECCIÓN</h2></div>
+      <p>Buscá una prenda, filtrá por categoría o elegí directamente tu talle.</p>
+    </div>
 
-    <!-- PROMOCIONES DESTACADAS -->
-    <section id="promociones" class="promos-section">
-        <div class="section-heading section-heading-light">
-            <span>Promociones de hoy</span>
-            <h2>Más llevás, más ahorrás</h2>
-            <p>Las promociones se aplican automáticamente dentro de tu carrito.</p>
-        </div>
+    <div class="catalog-tools">
+      <label class="search-box" for="productSearch">
+        <span aria-hidden="true">⌕</span>
+        <input id="productSearch" type="search" placeholder="Buscar prendas, accesorios..." autocomplete="off">
+      </label>
+      <div class="size-filter-wrap">
+        <label for="sizeFilter">Talle</label>
+        <select id="sizeFilter">
+          <option value="todos">Todos los talles</option>
+          <option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
+          <option value="38">38</option><option value="40">40</option><option value="42">42</option><option value="44">44</option><option value="46">46</option>
+          <option value="Única">Única</option>
+        </select>
+      </div>
+    </div>
 
-        <div class="promo-grid">
-            <article class="promo-card promo-card-yellow">
-                <div class="promo-badge">10% OFF</div>
-                <span class="promo-small">Llevando 6 unidades</span>
-                <h3>COCA-COLA 3 L</h3>
-                <p>Agregá seis botellas al carrito y el descuento se aplica automáticamente.</p>
-                <button class="promo-link" data-promo-product="cocacola-3l">Agregar al carrito →</button>
-            </article>
+    <div class="active-filters" id="activeFilters" aria-live="polite"></div>
+    <div class="category-bar" id="categoryBar">
+      <button class="category-btn active" data-category="todos">Todos</button>
+      <button class="category-btn" data-category="remeras">Remeras</button>
+      <button class="category-btn" data-category="camisas">Camisas</button>
+      <button class="category-btn" data-category="chombas">Chombas</button>
+      <button class="category-btn" data-category="pantalones">Pantalones</button>
+      <button class="category-btn" data-category="deportiva">Deportiva</button>
+      <button class="category-btn" data-category="urbana">Urbana</button>
+      <button class="category-btn" data-category="elegante">Elegante</button>
+      <button class="category-btn" data-category="accesorios">Accesorios</button>
+    </div>
+    <div class="productos-grid" id="productosGrid"></div>
+    <div class="no-results" id="noResults" hidden><h3>No encontramos lo que buscás.</h3><p>Probá con otra palabra, categoría o talle.</p><button class="empty-action" id="clearFilters">Limpiar filtros</button></div>
+  </section>
 
-            <article class="promo-card promo-card-dark">
-                <div class="promo-badge">COMBO</div>
-                <span class="promo-small">Fernet + Coca-Cola 3 L</span>
-                <h3>COMBO CLÁSICO</h3>
-                <p>1 Fernet + 1 Coca-Cola 3 L por un precio promocional.</p>
-                <button class="promo-link promo-link-light" data-promo-combo="fernet-coca">Armar combo →</button>
-            </article>
+  <section class="stock-info">
+    <div><span class="stock-dot available"></span><strong>Stock actualizado por talle</strong><p>Los talles agotados se deshabilitan automáticamente.</p></div>
+    <div><span class="stock-dot limited"></span><strong>Últimas unidades</strong><p>Te mostramos cuando quedan pocas unidades disponibles.</p></div>
+    <div><span class="stock-dot whatsapp-dot">⌁</span><strong>Pedido por WhatsApp</strong><p>Confirmás tu compra directamente con nosotros.</p></div>
+  </section>
 
-            <article class="promo-card promo-card-white">
-                <div class="promo-badge">8% OFF</div>
-                <span class="promo-small">Llevando 6 unidades</span>
-                <h3>QUILMES 473 ML</h3>
-                <p>Una promo pensada para compras por cantidad.</p>
-                <button class="promo-link" data-promo-product="quilmes-473">Agregar al carrito →</button>
-            </article>
-        </div>
-    </section>
+  <footer>
+    <div class="logo">INDUMENTARIA</div>
+    <p>© 2026 · Indumentaria & accesorios</p>
+    <div class="footer-links"><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a><small class="footer-credit">Diseño web · <a class="pulso-logo-link" href="https://www.instagram.com/pulsodigital.lr/" target="_blank" rel="noopener noreferrer" aria-label="Visitar el Instagram de Pulso Digital"><img src="img/pulsodigital_logo.png" alt="Pulso Digital" class="pulso-logo"></a></small></div>
+  </footer>
 
-    <!-- PRODUCTOS -->
-    <section id="productos" class="productos">
-        <div class="section-heading">
-            <span>Catálogo</span>
-            <h2>Elegí tus bebidas</h2>
-            <p>Precios ilustrativos para esta demostración. Pueden variar según comercio y ubicación.</p>
-        </div>
+  <a href="https://wa.me/5493804507584" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="cart-overlay" id="cartOverlay"></div>
 
-        <div class="category-bar" id="categoryBar" aria-label="Categorías de productos">
-            <button class="category-btn active" data-category="todos">Todos</button>
-            <button class="category-btn" data-category="aguas">Aguas</button>
-            <button class="category-btn" data-category="gaseosas">Gaseosas</button>
-            <button class="category-btn" data-category="cervezas">Cervezas</button>
-            <button class="category-btn" data-category="vodkas">Vodkas</button>
-            <button class="category-btn" data-category="fernet">Fernet</button>
-            <button class="category-btn" data-category="jugos">Jugos</button>
-        </div>
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <div class="cart-header"><div><span class="eyebrow">Tu selección</span><h2>TU CARRITO</h2></div><button class="close-cart" id="closeCart" aria-label="Cerrar carrito">×</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-summary-row"><span>Subtotal</span><strong id="cartSubtotal">$0</strong></div>
+      <div class="discount-row" id="promoDiscountRow" hidden><span>Descuentos</span><strong id="promoDiscount">-$0</strong></div>
+      <div class="discount-row transfer-discount-row" id="transferDiscountRow" hidden><span>Descuento por transferencia</span><strong id="transferDiscountAmount">-$0</strong></div>
+      <label class="transfer-option"><input type="checkbox" id="transferDiscount"> <span><strong>Pago por transferencia</strong><small>Aplicar descuento de transferencia</small></span></label>
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">$0</strong></div>
+      <button class="clear-cart" id="clearCart">Vaciar carrito</button>
+      <a class="checkout-btn" id="checkoutWhatsApp" href="#" target="_blank" rel="noopener">Confirmar pedido por WhatsApp</a>
+    </div>
+  </aside>
 
-        <div class="productos-grid" id="productosGrid"></div>
-    </section>
+  <div class="product-modal" id="productModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal" aria-label="Cerrar">×</button>
+      <div class="modal-image" id="modalImage"></div>
+      <div class="modal-info">
+        <span class="product-category" id="modalCategory"></span><h2 id="modalName"></h2><p id="modalDescription"></p>
+        <div class="modal-price" id="modalPrice"></div>
+        <div class="variant-title">Talle</div><div class="size-selector" id="sizeSelector"></div>
+        <div class="stock-status" id="stockStatus"></div>
+        <div class="modal-actions"><div class="quantity-selector"><button id="modalMinus">−</button><span id="modalQuantity">1</span><button id="modalPlus">+</button></div><button class="add-modal" id="addModal">Agregar al carrito</button></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- NOSOTROS -->
-    <section id="nosotros" class="nosotros">
-        <div class="nosotros-inner">
-            <div class="section-heading">
-                <!-- <span>Demo de e-commerce</span> -->
-                <h2>Comprá de forma simple</h2>
-            </div>
-            <!-- <p>
-                Esta tienda de demostración está pensada para mostrar una experiencia de compra rápida:
-                elegís tus productos, aprovechás promociones por cantidad o combos y enviás el pedido directamente por WhatsApp.
-            </p> -->
-        </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contacto" class="contacto">
-        <div class="section-heading">
-            <span>¿Tenés una consulta?</span>
-            <h2>Contactanos</h2>
-        </div>
-
-        <div class="contact-info">
-            <p>📍 La Rioja, Argentina</p>
-            <p>📞 WhatsApp: +54 9 380 450 7584</p>
-            <p>🕐 Lunes a sábado · 08:00 a 20:00</p>
-        </div>
-
-        <a href="https://wa.me/5493804507584" class="btn btn-dark" target="_blank" rel="noopener">
-            Escribinos por WhatsApp
-        </a>
-
-        <div class="pulso-digital">
-            <p>Diseñada por</p>
-            <img src="img/pulsodigital_logo.png" alt="Pulso Digital" class="pulso-logo">
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Distribuidora · Derechos Reservados</p>
-        <p>Precios y promociones son solo demostración.</p>
-    </footer>
-
-    <!-- WHATSAPP FLOTANTE -->
-    <a href="https://wa.me/5493804507584" class="whatsapp" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
-        <span>WhatsApp</span>
-    </a>
-
-    <!-- OVERLAY -->
-    <div class="cart-overlay" id="cartOverlay"></div>
-
-    <!-- CARRITO -->
-    <aside class="cart-panel" id="cartPanel" aria-hidden="true">
-        <div class="cart-header">
-            <div>
-                <span class="cart-label">Tu selección</span>
-                <h2>Tu pedido</h2>
-            </div>
-            <button class="close-cart" id="closeCart" aria-label="Cerrar carrito">&times;</button>
-        </div>
-
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart">
-                <div class="empty-cart-icon">🛒</div>
-                <h3>Tu carrito está vacío</h3>
-                <p>Agregá algunos productos para comenzar tu pedido.</p>
-            </div>
-        </div>
-
-        <div class="cart-footer">
-            <div class="cart-summary-row">
-                <span>Subtotal</span>
-                <strong id="cartSubtotal">$0</strong>
-            </div>
-            <div class="cart-summary-row discount-row" id="discountRow">
-                <span>Descuentos</span>
-                <strong id="cartDiscount">-$0</strong>
-            </div>
-            <div class="cart-total">
-                <span>Total</span>
-                <strong id="cartTotal">$0</strong>
-            </div>
-
-            <button class="clear-cart" id="clearCart" type="button">Vaciar carrito</button>
-
-            <a class="checkout-btn" id="checkoutWhatsApp" href="#" target="_blank" rel="noopener">
-                Pedir por WhatsApp
-            </a>
-        </div>
-    </aside>
-
-    <script src="script.js"></script>
+  <script src="script.js?v=20261018-2"></script>
 </body>
 </html>
